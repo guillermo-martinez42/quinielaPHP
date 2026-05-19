@@ -20,7 +20,7 @@
                     <li><a href="reporte-tabla-posiciones.php">Tabla de Posiciones</a></li>
                     <li><a href="reporte-quinielas.php">Puntajes Participantes</a></li>
                     <?php if (isset($_SESSION['es_admin']) && $_SESSION['es_admin'] == true): ?>
-                        <li><a href="admin-equipos.php" style="color: #fbbf24;">⚙️ ADMIN Partidos</a></li>
+                        <li><a href="admin-equipos.php" style="color: #fbbf24;">⚙️ ADMIN Equipos</a></li>
                         <li><a href="admin-partidos.php" style="color: #fbbf24;">⚙️ ADMIN Partidos</a></li>
                     <?php endif; ?>
                     <li><a href="logout.php" style="color: #f87171; font-weight: bold;">Salir

@@ -13,68 +13,113 @@ if (!in_array($fase_activa, ['grupos', 'eliminacion'])) {
     $fase_activa = 'grupos';
 }
 
-// Mapa "nombre del equipo" -> id_equipo (código FIFA) construido desde la tabla Equipo
+// Mapas desde la tabla Equipo:
+//   - $equipos_map: nombre del equipo -> id_equipo (FIFA)
+//   - $by_code:     id_equipo (FIFA)  -> { nombre, bandera }
 $equipos_map = [];
+$by_code     = [];
 try {
-    foreach ($db->query("SELECT id_equipo, nombre FROM Equipo") as $e) {
+    foreach ($db->query("SELECT id_equipo, nombre, bandera FROM Equipo") as $e) {
         $equipos_map[$e['nombre']] = $e['id_equipo'];
+        $by_code[$e['id_equipo']]  = $e;
     }
-} catch (PDOException $e) { /* aún no se ha cargado la tabla Equipo */ }
+} catch (PDOException $e) { /* tabla Equipo aún no cargada */ }
 
-// Aseguramos que exista la Fase de Grupos en el catálogo (FK requerida para insertar Partido)
+// Aseguramos que existan las Fases que usaremos (FK requerida para insertar Partido)
 try {
-    $db->exec("INSERT INTO Fase (id_fase, nombre_fase, orden) VALUES ('F1', 'Fase de Grupos', 1) ON CONFLICT (id_fase) DO NOTHING");
+    $db->exec("INSERT INTO Fase (id_fase, nombre_fase, orden) VALUES
+        ('F1', 'Fase de Grupos', 1),
+        ('F2', 'Dieciseisavos de Final', 2),
+        ('F3', 'Octavos de Final', 3),
+        ('F4', 'Cuartos de Final', 4),
+        ('F5', 'Semifinales', 5),
+        ('F7', 'Final', 7)
+        ON CONFLICT (id_fase) DO NOTHING");
 } catch (PDOException $e) { /* ignorar */ }
 
 // ===============================
 // Guardar Pronóstico (POST)
+// Distinguimos por rango de id_partido:
+//   - 8901..9301 -> partido del bracket de eliminación (creado por admin-partidos.php)
+//   - cualquier otro -> partido de Fase de Grupos (puede aún no existir en la BD)
 // ===============================
 if (isset($_POST['guardar_pronostico'])) {
     $id_partido = intval($_POST['id_partido']);
     $g1 = intval($_POST['p_goles1']);
     $g2 = intval($_POST['p_goles2']);
-    $fecha = $_POST['fecha'];
-    $hora  = $_POST['hora'];
-    $home  = $_POST['home_team'];
-    $away  = $_POST['away_team'];
-    $grupo = $_POST['grupo'];
+    $es_bracket = ($id_partido >= 8901 && $id_partido <= 9301);
 
-    $match_time = strtotime($fecha . ' ' . $hora);
-    if (time() >= $match_time) {
-        echo "<p class='error'>Error: Este partido ya comenzó o finalizó. No puedes modificar esta quiniela.</p>";
+    if ($es_bracket) {
+        // --- Flujo eliminación ---
+        $chk = $db->prepare("SELECT id_equipo1, id_equipo2, estado FROM Partido WHERE id_partido = ?");
+        $chk->execute([$id_partido]);
+        $p = $chk->fetch(PDO::FETCH_ASSOC);
+
+        if (!$p) {
+            echo "<p class='error'>Este partido del bracket aún no está inicializado. Pídele al admin que abra el panel de Eliminación primero.</p>";
+        } elseif (!$p['id_equipo1'] || !$p['id_equipo2']) {
+            echo "<p class='error'>Este partido todavía no tiene definidos a los dos equipos. Espera a que termine la ronda anterior.</p>";
+        } elseif ($p['estado'] === 'Finalizado') {
+            echo "<p class='error'>Este partido ya finalizó. No puedes modificar tu pronóstico.</p>";
+        } else {
+            try {
+                $exist = $db->prepare("SELECT id_quiniela FROM Quiniela WHERE id_usuario = ? AND id_partido = ?");
+                $exist->execute([$id_usuario, $id_partido]);
+                $q_id = $exist->fetchColumn();
+                if ($q_id) {
+                    $db->prepare("UPDATE Quiniela SET prediccion_goles1 = ?, prediccion_goles2 = ? WHERE id_quiniela = ?")
+                       ->execute([$g1, $g2, $q_id]);
+                } else {
+                    $db->prepare("INSERT INTO Quiniela (id_usuario, id_partido, prediccion_goles1, prediccion_goles2) VALUES (?, ?, ?, ?)")
+                       ->execute([$id_usuario, $id_partido, $g1, $g2]);
+                }
+                echo "<p class='success'>¡Pronóstico de eliminación guardado!</p>";
+            } catch (PDOException $e) {
+                echo "<p class='error'>Error al guardar: " . $e->getMessage() . "</p>";
+            }
+        }
     } else {
-        try {
-            // 1) Asegurar que el Partido exista en la BD (vinculado al equipo correspondiente)
-            $chk = $db->prepare("SELECT id_partido FROM Partido WHERE id_partido = ?");
-            $chk->execute([$id_partido]);
-            if (!$chk->fetchColumn()) {
-                $id_eq1 = $equipos_map[$home] ?? $home;
-                $id_eq2 = $equipos_map[$away] ?? $away;
-                $insP = $db->prepare("INSERT INTO Partido (id_partido, fecha, hora, estado, id_fase, id_equipo1, id_equipo2, grupo_partido)
-                                      VALUES (?, ?, ?, 'Pendiente', 'F1', ?, ?, ?)");
-                $insP->execute([$id_partido, $fecha, $hora, $id_eq1, $id_eq2, $grupo]);
-            }
+        // --- Flujo Fase de Grupos (igual que antes) ---
+        $fecha = $_POST['fecha'];
+        $hora  = $_POST['hora'];
+        $home  = $_POST['home_team'];
+        $away  = $_POST['away_team'];
+        $grupo = $_POST['grupo'];
 
-            // 2) UPSERT manual del pronóstico en Quiniela
-            $exist = $db->prepare("SELECT id_quiniela FROM Quiniela WHERE id_usuario = ? AND id_partido = ?");
-            $exist->execute([$id_usuario, $id_partido]);
-            $q_id = $exist->fetchColumn();
+        $match_time = strtotime($fecha . ' ' . $hora);
+        if (time() >= $match_time) {
+            echo "<p class='error'>Error: Este partido ya comenzó o finalizó. No puedes modificar esta quiniela.</p>";
+        } else {
+            try {
+                $chk = $db->prepare("SELECT id_partido FROM Partido WHERE id_partido = ?");
+                $chk->execute([$id_partido]);
+                if (!$chk->fetchColumn()) {
+                    $id_eq1 = $equipos_map[$home] ?? $home;
+                    $id_eq2 = $equipos_map[$away] ?? $away;
+                    $insP = $db->prepare("INSERT INTO Partido (id_partido, fecha, hora, estado, id_fase, id_equipo1, id_equipo2, grupo_partido)
+                                          VALUES (?, ?, ?, 'Pendiente', 'F1', ?, ?, ?)");
+                    $insP->execute([$id_partido, $fecha, $hora, $id_eq1, $id_eq2, $grupo]);
+                }
 
-            if ($q_id) {
-                $up = $db->prepare("UPDATE Quiniela SET prediccion_goles1 = ?, prediccion_goles2 = ? WHERE id_quiniela = ?");
-                $up->execute([$g1, $g2, $q_id]);
-            } else {
-                $ins = $db->prepare("INSERT INTO Quiniela (id_usuario, id_partido, prediccion_goles1, prediccion_goles2) VALUES (?, ?, ?, ?)");
-                $ins->execute([$id_usuario, $id_partido, $g1, $g2]);
+                $exist = $db->prepare("SELECT id_quiniela FROM Quiniela WHERE id_usuario = ? AND id_partido = ?");
+                $exist->execute([$id_usuario, $id_partido]);
+                $q_id = $exist->fetchColumn();
+                if ($q_id) {
+                    $db->prepare("UPDATE Quiniela SET prediccion_goles1 = ?, prediccion_goles2 = ? WHERE id_quiniela = ?")
+                       ->execute([$g1, $g2, $q_id]);
+                } else {
+                    $db->prepare("INSERT INTO Quiniela (id_usuario, id_partido, prediccion_goles1, prediccion_goles2) VALUES (?, ?, ?, ?)")
+                       ->execute([$id_usuario, $id_partido, $g1, $g2]);
+                }
+                echo "<p class='success'>¡Pronóstico guardado exitosamente!</p>";
+            } catch (PDOException $e) {
+                echo "<p class='error'>Error al guardar: " . $e->getMessage() . "</p>";
             }
-            echo "<p class='success'>¡Pronóstico guardado exitosamente!</p>";
-        } catch (PDOException $e) {
-            echo "<p class='error'>Error al guardar: " . $e->getMessage() . "</p>";
         }
     }
 }
 
-// Cargar pronósticos previos del usuario, indexados por id_partido
+// Cargar pronósticos previos del usuario indexados por id_partido
 $pronosticos = [];
 $stmtP = $db->prepare("SELECT id_partido, prediccion_goles1, prediccion_goles2, puntos_obtenidos FROM Quiniela WHERE id_usuario = ?");
 $stmtP->execute([$id_usuario]);
@@ -88,6 +133,17 @@ if (file_exists('groups.json')) {
     $data = json_decode(file_get_contents('groups.json'), true);
     $grupos = $data['groups'] ?? [];
 }
+
+// Cargar el bracket de eliminación desde la tabla Partido (ids 8901..9301)
+$bracket_partidos = [];
+try {
+    $rsB = $db->query("SELECT id_partido, id_fase, id_equipo1, id_equipo2, goles_equipo1, goles_equipo2, estado
+                       FROM Partido
+                       WHERE id_partido BETWEEN 8901 AND 9301");
+    foreach ($rsB->fetchAll(PDO::FETCH_ASSOC) as $r) {
+        $bracket_partidos[(int)$r['id_partido']] = $r;
+    }
+} catch (PDOException $e) { /* ignorar */ }
 ?>
 
 <h2>Mis Pronósticos - Llenar mi Quiniela</h2>
@@ -150,10 +206,107 @@ if (file_exists('groups.json')) {
         <?php endforeach; ?>
     <?php endforeach; ?>
 
-<?php else: ?>
-    <div style="background: #f1f5f9; padding: 40px; border-radius: 8px; text-align: center; color: #64748b; border: 1px dashed #cbd5e1;">
-        <h3 style="margin: 0; color: #1e3a8a;">Fase de Eliminación</h3>
-        <p>Esta sección estará disponible próximamente.</p>
+<?php else:
+    // ===========================================================
+    // Bracket de Eliminación - misma estructura que admin-partidos.php
+    // ===========================================================
+    $rondas = [
+        ['titulo' => 'Dieciseisavos',    'ids' => [8901,8902,8903,8904,8905,8906,8907,8908,8909,8910,8911,8912,8913,8914,8915,8916], 'color' => '#0ea5e9'],
+        ['titulo' => 'Octavos de Final', 'ids' => [9001,9002,9003,9004,9005,9006,9007,9008], 'color' => '#3b82f6'],
+        ['titulo' => 'Cuartos de Final', 'ids' => [9101,9102,9103,9104],                     'color' => '#8b5cf6'],
+        ['titulo' => 'Semifinales',      'ids' => [9201,9202],                               'color' => '#ec4899'],
+        ['titulo' => 'Final',            'ids' => [9301],                                    'color' => '#f59e0b'],
+    ];
+?>
+    <h3 style="color:#1e3a8a; margin-top:0;">Bracket de Eliminación</h3>
+    <p style="color:#475569;">Ingresa tu pronóstico para cada partido. Las tarjetas con "Por definir" se desbloquearán cuando el admin guarde los resultados de la ronda anterior y los equipos avancen automáticamente.</p>
+
+    <?php if (empty($bracket_partidos)): ?>
+        <p class="error">El bracket todavía no está inicializado. Pídele al admin que abra <strong>Administración &rarr; Fase de Eliminación</strong> al menos una vez.</p>
+    <?php endif; ?>
+
+    <div style="display: flex; gap: 18px; align-items: stretch; overflow-x: auto; padding: 10px 0 30px 0;">
+        <?php foreach ($rondas as $ronda): ?>
+            <div style="flex: 1; min-width: 210px; display: flex; flex-direction: column;">
+                <h4 style="text-align: center; color: <?php echo $ronda['color']; ?>; margin: 0 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid <?php echo $ronda['color']; ?>;">
+                    <?php echo $ronda['titulo']; ?>
+                </h4>
+                <div style="display: flex; flex-direction: column; justify-content: space-around; flex: 1; gap: 10px; min-height: 900px;">
+                    <?php foreach ($ronda['ids'] as $mid):
+                        $bp = $bracket_partidos[$mid] ?? null;
+                        $e1 = $bp['id_equipo1'] ?? null;
+                        $e2 = $bp['id_equipo2'] ?? null;
+                        $finalizado = isset($bp['estado']) && $bp['estado'] === 'Finalizado';
+                        $listo      = $e1 && $e2;
+
+                        $home_label = ($e1 && isset($by_code[$e1])) ? $by_code[$e1]['nombre'] : ($e1 ?: 'Por definir');
+                        $away_label = ($e2 && isset($by_code[$e2])) ? $by_code[$e2]['nombre'] : ($e2 ?: 'Por definir');
+                        $home_flag  = ($e1 && isset($by_code[$e1])) ? $by_code[$e1]['bandera'] : '';
+                        $away_flag  = ($e2 && isset($by_code[$e2])) ? $by_code[$e2]['bandera'] : '';
+
+                        $p1_val = $pronosticos[$mid]['prediccion_goles1'] ?? '';
+                        $p2_val = $pronosticos[$mid]['prediccion_goles2'] ?? '';
+                        $puntos = $pronosticos[$mid]['puntos_obtenidos'] ?? 0;
+
+                        $puede_pronosticar = ($listo && !$finalizado);
+
+                        // Color de fondo y borde según estado
+                        $bg     = $finalizado ? '#f1f5f9' : ($listo ? '#ffffff' : '#f8fafc');
+                        $border = $finalizado ? '#94a3b8' : ($listo ? '#cbd5e1' : '#e2e8f0');
+                    ?>
+                        <div style="background: <?php echo $bg; ?>; padding: 10px; border-radius: 8px; border: 1px solid <?php echo $border; ?>;">
+                            <div style="font-size:10px; color:#94a3b8; text-align:center; margin-bottom:6px; letter-spacing:0.5px;">Partido #<?php echo $mid; ?></div>
+
+                            <?php if ($finalizado): ?>
+                                <div style="font-size:11px; text-align:center; background:#fef3c7; color:#92400e; padding:4px; border-radius:4px; margin-bottom:6px; font-weight:bold;">
+                                    Resultado oficial: <?php echo intval($bp['goles_equipo1']); ?> - <?php echo intval($bp['goles_equipo2']); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <form method="POST" action="?fase=eliminacion">
+                                <input type="hidden" name="id_partido" value="<?php echo $mid; ?>">
+
+                                <div style="display:flex; align-items:center; gap:6px; padding:5px 4px;">
+                                    <span style="font-size:16px;"><?php echo $home_flag ?: '🏳️'; ?></span>
+                                    <span style="flex:1; font-size:13px; color: <?php echo $e1 ? '#1e293b' : '#94a3b8'; ?>;">
+                                        <?php echo htmlspecialchars($home_label); ?>
+                                    </span>
+                                    <input type="number" name="p_goles1" value="<?php echo $p1_val; ?>" min="0"
+                                           style="width: 42px; text-align: center; padding:3px;"
+                                           <?php echo $puede_pronosticar ? 'required' : 'disabled'; ?>>
+                                </div>
+
+                                <div style="display:flex; align-items:center; gap:6px; padding:5px 4px; margin-top:3px; border-top:1px dashed #e2e8f0;">
+                                    <span style="font-size:16px;"><?php echo $away_flag ?: '🏳️'; ?></span>
+                                    <span style="flex:1; font-size:13px; color: <?php echo $e2 ? '#1e293b' : '#94a3b8'; ?>;">
+                                        <?php echo htmlspecialchars($away_label); ?>
+                                    </span>
+                                    <input type="number" name="p_goles2" value="<?php echo $p2_val; ?>" min="0"
+                                           style="width: 42px; text-align: center; padding:3px;"
+                                           <?php echo $puede_pronosticar ? 'required' : 'disabled'; ?>>
+                                </div>
+
+                                <?php if ($finalizado): ?>
+                                    <div style="font-size:12px; color:#10b981; text-align:center; margin-top:8px;">
+                                        🔒 Puntos Ganados: <strong><?php echo $puntos; ?></strong>
+                                    </div>
+                                <?php elseif ($listo): ?>
+                                    <button type="submit" name="guardar_pronostico"
+                                            style="width:100%; margin-top:8px; padding:6px 0; font-size:12px; font-weight:bold;
+                                                   background: <?php echo $ronda['color']; ?>; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+                                        Guardar
+                                    </button>
+                                <?php else: ?>
+                                    <div style="font-size:11px; color:#94a3b8; text-align:center; margin-top:8px; font-style:italic;">
+                                        Esperando equipos
+                                    </div>
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 <?php endif; ?>
 </div>
