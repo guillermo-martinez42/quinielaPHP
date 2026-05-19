@@ -1,0 +1,1092 @@
+/* ========================= VARIABLES & SETUP ========================= */
+:root {
+  --primary: #EA5E20;
+  --primary-dark: #d94f14;
+  --dark: #0a0a0a;
+  --dark-2: #111111;
+  --light: #ffffff;
+  --gray: #f3f4f6;
+  --text: #6b7280;
+  --transition: .35s ease;
+  --shadow-lg: 0 25px 60px rgba(0,0,0,.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1320px, 92%);
+  margin: auto;
+}
+
+/* ========================= HEADER & NAV ========================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
+/* Dropdown */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  min-width: 260px;
+  background: #111;
+  border-radius: 12px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  box-shadow: var(--shadow-lg);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu a:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ========================= HERO SECTION ========================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 90px;
+  
+  background-color: #c24c19; 
+  background-image: url('http://infiniterenovation.ca/wp-content/uploads/2026/05/CASCO-STICKER-FINAL-03-2.png');
+  
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: contain;
+
+  border-bottom-left-radius: 55px;
+  border-bottom-right-radius: 55px;
+}
+
+.hero-text {
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 0.9;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
+}
+
+/* ========================= PROJECTS SLIDER ========================= */
+
+.projects-section-unified {
+    padding: 60px 0;
+    background-color: #ffffff; /* Fondo de la página fuera de la cápsula */
+}
+
+.unified-container {
+    background-color: #f3f3f3;
+    border-radius: 40px;       
+    padding: 50px;
+    overflow: visible;
+    position: relative;         
+}
+
+.unified-header {
+    margin-bottom: 35px;
+}
+
+.unified-slider-wrapper1 {
+    position: relative;
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.project-title-top {
+    color: #EA5E20; 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.project-subtitle-top {
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.unified-images-slider {
+    flex: 1;          
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;  
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+}
+
+.unified-images-slider::-webkit-scrollbar {
+    display: none;      
+}
+
+.unified-images-slider .slide-item {
+    flex: 0 0 400px;  
+    height: 480px;      
+    scroll-snap-align: start;
+}
+
+.slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 35px;
+}
+
+.info-item {
+    flex: 0 0 380px; 
+    height: 480px;
+    background: linear-gradient(180deg, #222 0%, #111 100%);
+    border-radius: 35px;
+    padding: 40px;
+    display: flex;
+    align-items: flex-end;
+    color: #ffffff;
+    position: sticky;  
+    left: 0;            
+    z-index: 10;        
+}
+
+.dark-type-card h3 {
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.dark-type-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+.unified-slider-wrapper1 {
+    position: relative;
+    width: 100%;
+}
+
+.unified-slider-wrapper1 .arrow-overlap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff !important;
+    color: #000 !important;
+    border: none !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    z-index: 150;
+    cursor: pointer;
+    display: flex;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.unified-slider-wrapper1:hover .arrow-overlap {
+    opacity: 1;
+    visibility: visible;
+}
+
+.unified-slider-wrapper1 .arrow-overlap.prev {
+    left: 380px; /* Ajustado para quedar en la unión de la tarjeta y las fotos */
+}
+
+.unified-slider-wrapper1 .arrow-overlap.next {
+    right: -20px; 
+}
+
+.arrow-overlap {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* ========================= PROJECT 2 ========================= */
+.project-slider-orange {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.orange-container {
+    background-color: var(--primary); /* Naranja */
+    border-radius: 40px;
+    padding: 50px;
+    color: #000;
+    position: relative;
+}
+
+.orange-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.orange-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.orange-slider-wrapper {
+    display: flex;
+    gap: 25px;
+    position: relative;
+    align-items: flex-start; /* Necesario para que el sticky funcione */
+}
+
+.images-slider-alt {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    padding: 5px 0;
+}
+
+.images-slider-alt::-webkit-scrollbar { display: none; }
+
+.slide-item-alt {
+    flex: 0 0 720px; /* Ancho de cada foto */
+    scroll-snap-align: start;
+}
+
+.slide-item-alt img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.black-info-card-sticky {
+    flex: 0 0 380px;
+    height: 480px;
+    background-color: #000;
+    border-radius: 35px;
+    padding: 40px;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    
+    position: sticky;
+    right: 0; /* Se pega a la derecha del contenedor */
+    z-index: 10;
+}
+
+.placeholder-orange {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-radius: 30px;
+    height: 480px;
+}
+
+.orange-slider-wrapper .arrow-overlap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff !important;
+    color: #000 !important;
+    border: none !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    z-index: 100;
+    cursor: pointer;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.orange-slider-wrapper .arrow-overlap.prev { left: -20px; }
+.orange-slider-wrapper .arrow-overlap.next { right: 400px; } /* Ajustado para quedar en la unión */
+
+.orange-slider-wrapper:hover .arrow-overlap {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Mejora el centrado del icono dentro de la flecha */
+.orange-slider-wrapper .arrow-overlap {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+/* ========================= PROJECT 3 (DARK GRID) ========================= */
+.project-grid-dark {
+    background-color: #fff;
+}
+
+.dark-container {
+    background-color: #000;
+    border-radius: 40px;
+    padding: 60px 50px;
+    color: #fff;
+}
+
+.project-masonry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Reducimos un poco el gap para más elegancia */
+    align-items: start;
+}
+
+.unified-slider-wrapper {
+    position: relative;
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.project-masonry .unified-slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Corta el desborde de las fotos redondas */
+    border-radius: 30px;
+}
+
+.project-masonry .unified-images-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: 30px;
+}
+
+.project-masonry .unified-images-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.project-masonry .slide-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.project-masonry .slide-item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+.arrow-mini {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #000 !important;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Ocultos por defecto */
+    transition: opacity 0.3s ease;
+}
+
+.unified-slider-wrapper:hover .arrow-mini {
+    opacity: 1;
+}
+
+.arrow-mini.prev { left: 15px; }
+.arrow-mini.next { right: 15px; }
+
+.placeholder-dark {
+    background-color: #1a1a1a;
+    border: 2px dashed #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    height: 300px;
+}
+
+.project-masonry .grid-item:nth-child(1) img, 
+.project-masonry .grid-item:nth-child(1) .placeholder-dark { 
+    height: 380px; 
+}
+
+.text-item-bottom {
+    height: 380px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Empuja el contenido al fondo */
+    padding: 20px 10px; /* Espaciado interno */
+}
+
+.text-content-wrapper h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.text-content-wrapper p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* ========================= PROJECT 4 - FIX IMAGES ========================= */
+.project-composite-dark {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.dark-composite-container {
+    background-color: #000;
+    border-radius: 40px;
+    padding: 50px;
+    color: #fff;
+    overflow: hidden; /* Mantiene todo dentro del borde redondeado */
+}
+
+.composite-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Tarjeta Naranja */
+.composite-info-card {
+    background: linear-gradient(180deg, var(--primary) 0%, #d94f14 100%);
+    border-radius: 30px;
+    padding: 40px 30px;
+    display: flex;
+    align-items: flex-end;
+    min-height: 550px; 
+}
+
+/* Bloque de imágenes */
+.composite-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0; /* Evita desbordamiento horizontal */
+}
+
+.unified-slider-wrapper {
+    position: relative;
+    border-radius: 35px;
+    overflow: hidden; /* Esencial para el carrusel horizontal */
+    width: 100%;
+}
+
+/* AJUSTE DE ALTURA FIJA: Aquí evitamos el scroll vertical */
+.img-wide-wrapper .unified-images-slider {
+    height: 380px; /* Altura máxima para la imagen superior */
+}
+
+.img-half-wrapper .unified-images-slider {
+    height: 250px; /* Altura máxima para las imágenes inferiores */
+}
+
+.img-bottom-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.img-half-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+/* COMPORTAMIENTO DE IMAGEN: Forzamos el ajuste sin scroll */
+.composite-images .slide-item {
+    min-width: 100%;
+    height: 100%; /* Ocupa exactamente la altura del slider */
+}
+
+.composite-images .slide-item img {
+    width: 100%;
+    height: 100%;
+    /* 'cover' llena el espacio, 'contain' muestra la foto completa con bordes */
+    object-fit: cover; 
+    display: block;
+}
+
+/* Estilo para los espacios vacíos */
+.placeholder-dark {
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================= PROJECT SLIDER (GREY - SECTION 5) ========================= */
+.project-grey-container {
+    background-color: #efefef; 
+    border-radius: 40px;
+    padding: 50px;
+    margin-bottom: 60px; /* Espaciado con la siguiente sección */
+    position: relative;
+}
+
+.project-header-text {
+    margin-bottom: 35px;
+}
+
+.title-orange {
+    color: #EA5E20; /* Tu naranja de marca */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+.subtitle-dark {
+    font-weight: 500;
+    color: #333;
+    font-size: 1rem;
+}
+
+.project-grey-container .unified-slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+}
+
+.project-grey-container .unified-images-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+    padding: 10px 0;
+}
+
+.project-grey-container .unified-images-slider::-webkit-scrollbar {
+    display: none; /* Oculta scroll en Chrome/Safari */
+}
+
+.project-grey-container .slide-item {
+    flex: 0 0 380px; /* Ancho fijo para cada tarjeta */
+    height: 480px;
+    scroll-snap-align: none;
+    position: relative;
+}
+
+.project-grey-container .slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 35px;
+    display: block;
+}
+
+.info-item-dark {
+    background: #1a1a1a;
+    border-radius: 35px;
+    padding: 40px;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    position: -webkit-sticky;
+    left: 0;
+    z-index: 20;
+    flex: 0 0 380px; 
+    height: 480px;
+    box-shadow: 15px 0 30px rgba(0,0,0,0.1);
+}
+
+.dark-type-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.dark-type-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+.project-grey-container .placeholder-dark {
+    background-color: #1a1a1a;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #333;
+}
+
+.project-grey-container .arrow-overlap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    color: rgb(0, 0, 0) !important;
+    border: none !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    z-index: 100;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s ease;
+}
+
+.project-grey-container .unified-slider-wrapper:hover .arrow-overlap {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-grey-container .arrow-overlap:hover {
+    background-color: #000000 !important;
+    color: #fff !important;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.project-grey-container .arrow-overlap.prev {
+    left: 395px; 
+    z-index: 11;
+}
+
+.project-grey-container .arrow-overlap.next {
+    right: -30px;
+    z-index: 11;
+}
+
+/* ========================= ORANGE GRADIENT STYLE ========================= */
+.project-orange-gradient {
+    padding: 60px 0;
+}
+
+.unified-slider-wrapper-orange {
+    position: relative;
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    background: transparent;
+}
+.orange-grad-container {
+    background: linear-gradient(135deg, var(--primary) 0%, #ff834d 100%); 
+    border-radius: 40px;
+    padding: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.orange-grad-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+.orange-grad-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.orange-grad-container .unified-images-slider {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 10px 0;
+    position: relative;
+}
+
+.orange-grad-container .unified-images-slider::-webkit-scrollbar { display: none; }
+
+.orange-grad-container .slide-item {
+    flex: 0 0 710px; 
+    height: 480px;
+    position: relative;
+    z-index: 1;
+}
+
+.orange-grad-container .slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 35px;
+}
+
+.orange-black-card.sticky-right {
+    background-color: #000;
+    border-radius: 35px;
+    padding: 40px;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    position: sticky;
+    right: 0; 
+    z-index: 100;
+    flex: 0 0 380px;
+    height: 480px;
+    box-shadow: -20px 0 30px rgba(0,0,0,0.1);
+    margin-left: 25px;
+}
+
+.orange-grad-container .arrow-overlap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff !important;
+    color: #000 !important;
+    border: none !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    z-index: 100;
+    cursor: pointer;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.orange-grad-container .unified-slider-wrapper:hover .arrow-overlap {
+    opacity: 1;
+    visibility: visible;
+}
+
+.orange-grad-container .arrow-overlap.prev {
+    left: -15px;
+}
+
+.orange-grad-container .arrow-overlap.next {
+    right: 405px;
+}
+
+.orange-grad-container .placeholder-dark {
+    background-color: rgba(0,0,0,0.2);
+    border: 2px dashed rgba(0,0,0,0.3);
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.unified-slider-wrapper-orange:hover .arrow-overlap {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ========================= PRE-FOOTER CTA ========================= */
+.pre-footer-cta {
+  background-color: var(--primary);
+  padding: 80px 0 40px;
+}
+
+.cta-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cta-text {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.cta-button {
+  background: #111;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.cta-button:hover {
+  background: #fff;
+  color: var(--primary);
+}
+
+.cta-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ========================= FOOTER ========================= */
+.footer {
+  background: var(--primary);
+  color: #fff;
+  padding-bottom: 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+  padding: 60px 0;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  margin-bottom: 20px;
+  /* Si la imagen original es oscura, esto la vuelve blanca */
+  filter: brightness(0) invert(1); 
+}
+
+.footer-description {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.social-icon:hover {
+  background: #fff;
+}
+
+.footer-links h4 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  text-transform: capitalize;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-nav a {
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.footer-nav a:hover {
+  opacity: 1;
+  padding-left: 5px;
+}
+
+.copyright {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 25px 0;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* ========================= RESPONSIVE ADJUSTMENTS ========================= */
+
+@media (max-width: 1024px) {
+    .unified-slider-wrapper1, 
+    .orange-slider-wrapper, 
+    .unified-slider-wrapper-orange {
+        flex-direction: column;
+    }
+
+    .info-item, 
+    .black-info-card-sticky, 
+    .info-item-dark, 
+    .orange-black-card.sticky-right {
+        position: relative; /* Quitamos el sticky en tablets/móvil */
+        width: 100% !important;
+        flex: 0 0 auto;
+        height: auto;
+        min-height: 250px;
+        margin: 0 0 20px 0 !important;
+        right: auto;
+        left: auto;
+    }
+
+    .unified-images-slider .slide-item, 
+    .images-slider-alt .slide-item-alt {
+        flex: 0 0 85%; /* Las fotos ocupan casi todo el ancho */
+    }
+
+    .project-masonry {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+    }
+
+    .composite-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================= HOVER & INTERACTIVITY ========================= */
+
+/* Efecto suave para las imágenes al pasar el mouse */
+.slide-item img, .slide-item-alt img {
+    transition: transform 0.5s ease;
+}
+
+.slide-item:hover img, .slide-item-alt:hover img {
+    transform: scale(1.03);
+}
+
+/* Estilo para los placeholders cuando no hay imagen */
+.placeholder-dark, .placeholder-orange {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.3);
+    background: #1a1a1a;
+    border-radius: 35px;
+}
+
+/* ========================= MASONRY GRID SPECIFICS ========================= */
+.project-masonry .grid-item {
+    transition: transform 0.3s ease;
+}
+
+.project-masonry .grid-item:hover {
+    transform: translateY(-5px);
+}
+
+/* ========================= FOOTER LOGO FIX ========================= */
+.footer-logo-img {
+    max-width: 220px;
+}

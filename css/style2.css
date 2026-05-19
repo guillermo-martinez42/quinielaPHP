@@ -1,0 +1,1317 @@
+/* ========================= VARIABLES & SETUP ========================= */
+:root {
+  --primary: #EA5E20;
+  --primary-dark: #d94f14;
+  --dark: #0a0a0a;
+  --dark-2: #111111;
+  --light: #ffffff;
+  --gray: #f3f4f6;
+  --text: #6b7280;
+  --transition: .35s ease;
+  --shadow-lg: 0 25px 60px rgba(0,0,0,.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1320px, 92%);
+  margin: auto;
+}
+
+/* ========================= HEADER & NAV ========================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
+/* Dropdown */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  min-width: 260px;
+  background: #111;
+  border-radius: 12px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  box-shadow: var(--shadow-lg);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu a:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ========================= HERO SECTION ========================= */
+.residential-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 90px;
+  
+  background-color: #c24c19; 
+  background-image: url('http://infiniterenovation.ca/wp-content/uploads/2026/05/CASCO-STICKER-FINAL-03-2.png');
+  
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: contain;
+
+  border-bottom-left-radius: 55px;
+  border-bottom-right-radius: 55px;
+}
+
+.hero-text {
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 0.9;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
+}
+
+.hero-text p {
+  color: #fff;
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin-bottom: 35px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 16px 32px;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    background: #fff;
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ========================= ABOUT ========================= */
+
+.residential-about{
+    padding:90px 0;
+}
+
+.about-grid{
+    background:#ececec;
+    border-radius:35px;
+
+    padding:70px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about-text h2{
+    color:#FA661A;
+    font-size:58px;
+    line-height:1;
+    font-weight:900;
+    margin-bottom:30px;
+    letter-spacing:-2px;
+}
+
+.about-text p{
+    color:#303030;
+    font-size:15px;
+    line-height:1.8;
+    max-width:520px;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:35px;
+    display:block;
+    object-fit:cover;
+}
+
+/* ========================= about ==========================*/
+.offers-section {
+    background: linear-gradient(135deg, #f1641d 0%, #ea5e20 100%);
+    padding: 80px 0;
+    border-radius: 40px; 
+    margin: 40px 20px;
+}
+
+.offers-title {
+    text-align: center;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, 280px); /* Un poco más de altura */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.offer-card {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.offer-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.5s ease;
+}
+
+.offer-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 60%, rgba(0,0,0,0.7));
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+}
+
+.offer-overlay h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 550;
+    margin: 0;
+}
+
+.whole-home {
+    grid-column: 2 / 3; 
+    grid-row: 1 / 3;  
+}
+
+.offer-card:hover img {
+    transform: scale(1.1);
+}
+
+/* =================== Bloque Principal Commercial ===================*/
+.comm-services-section {
+    background-color: #f16c14; 
+    padding: 80px 40px;
+    border-radius: 50px; 
+    margin: 30px;
+}
+
+.comm-main-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+    font-weight: 650;
+}
+
+.comm-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.comm-service-item {
+    position: relative;
+    height: 550px;
+    border-radius: 35px; 
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.comm-service-item:hover {
+    transform: translateY(-10px);
+}
+
+.comm-service-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comm-text-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 25px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+}
+
+.comm-text-layer h3 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: none; 
+}
+
+/* =================== Bloque Principal Luxury ===================*/
+
+.lux-offers-section {
+    background-color: #f0670c;
+    padding: 80px 20px;
+    border-radius: 40px;
+    margin: 20px;
+}
+
+.lux-main-title {
+    color: white;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.lux-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lux-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.lux-image-box {
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.lux-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lux-content h3 {
+    color: rgb(0, 0, 0);
+    font-size: 1.8rem;
+    font-weight: 650;
+    margin-bottom: 15px;
+}
+
+.lux-content p {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.lux-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.lux-list li {
+    color: white;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 15px;
+}
+
+.lux-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+.lux-btn {
+    margin: auto auto 0 auto; 
+    display: block;
+    background-color: #111;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    width: 220px; 
+    flex-shrink: 0; 
+    transition: transform 0.3s ease, background 0.3s scale;
+}
+
+.lux-btn:hover {
+    background-color: #ffffff;
+    color: #000;
+}
+
+/* ========================= PROCESS SECTION ========================= */
+.process-section {
+    background: radial-gradient(circle at center, #2a2a2a 0%, #0a0a0a 100%);
+    padding: 100px 0;
+    border-radius: 50px;
+    margin: 60px 20px;
+    color: #fff;
+}
+
+.process-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.process-brand {
+    flex: 1;
+}
+
+.process-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -2px;
+}
+
+.process-main-title span {
+    display: block;
+    font-weight: 600; 
+}
+
+.process-steps {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 60px 40px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.step-icon {
+    min-width: 90px;
+    height: 90px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(234, 94, 32, 0.3);
+}
+
+.step-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.step-content p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.4;
+    max-width: 200px;
+}
+
+/* ========================= CTA SECTION ========================= */
+.cta-integration{
+    padding:90px 90px;
+}
+
+.cta-container{
+    background:#ececec;
+    border-radius:35px;
+
+    padding:70px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.cta-content .section-title {
+    font-family: inherit; 
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: #222;
+}
+
+.cta-content .highlight {
+    color: #ff6600; 
+}
+
+.cta-content .section-description {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.cta-image img {
+    width: 100%;
+    border-radius: 15px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ffffff;
+    color:rgb(0, 0, 0);
+    transform: translateY(-3px);
+}
+
+/* ========================= PRE-FOOTER CTA ========================= */
+.pre-footer-cta {
+  background-color: var(--primary);
+  padding: 80px 0 40px;
+}
+
+.cta-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cta-text {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.cta-button {
+  background: #111;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.cta-button:hover {
+  background: #fff;
+  color: var(--primary);
+}
+
+.cta-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ========================= FOOTER ========================= */
+.footer {
+  background: var(--primary);
+  color: #fff;
+  padding-bottom: 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+  padding: 60px 0;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  margin-bottom: 20px;
+  /* Si la imagen original es oscura, esto la vuelve blanca */
+  filter: brightness(0) invert(1); 
+}
+
+.footer-description {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.social-icon:hover {
+  background: #fff;
+}
+
+.footer-links h4 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  text-transform: capitalize;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-nav a {
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.footer-nav a:hover {
+  opacity: 1;
+  padding-left: 5px;
+}
+
+.copyright {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 25px 0;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* ================================================================
+   READY TO TRANSFORM & CONTACT CARDS (ESTILO INTEGRADO)
+   ================================================================ */
+
+.cta-integration {
+    padding: 60px 20px;
+    background-color: #fff;
+}
+
+.cta-container {
+    background: var(--primary); /* Fondo Naranja */
+    border-radius: 40px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Imagen Superior */
+.cta-image {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.cta-image img {
+    width: 100%;
+    border-radius: 40px; /* Bordes redondeados como la imagen */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+/* Textos */
+.cta-content .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.cta-content .section-description {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 600px;
+}
+
+/* Bloque de Tarjetas Blancas (Contact Info) */
+.cta-contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.contact-card-white {
+    background: #fff;
+    border-radius: 25px;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.contact-card-white:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon-box {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.card-icon-box img {
+    width: 30px;
+    filter: brightness(0) invert(1);
+}
+
+.card-info h4 {
+    font-size: 1.1rem;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.card-info p {
+    font-size: 1rem;
+    color: #444;
+    margin: 0;
+}
+
+/* ================================================================
+   RESPONSIVE UNIFICADO (TABLETS & MÓVILES)
+   ================================================================ */
+@media (max-width: 768px) {
+    
+    /* --- HEADER & NAVIGATION --- */
+    #menu-toggle { display: none; }
+
+    .navbar {
+        justify-content: space-between;
+        padding: 0 20px;
+        min-height: 80px;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1000;
+        padding: 10px;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background-color: #ffffff !important;
+        border-radius: 10px;
+        transition: var(--transition);
+    }
+
+    /* Animación Hamburger al abrir */
+    #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+    #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .nav {
+        position: fixed;
+        top: 85px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 85px);
+        background: #0a0a0a;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 40px;
+        gap: 25px;
+        transition: 0.4s ease-in-out;
+        z-index: 998;
+        overflow-y: auto;
+    }
+
+    #menu-toggle:checked ~ .nav { left: 0; }
+
+    /* Dropdown adaptado a móvil */
+    .nav-dropdown { width: 100%; }
+    
+    .nav-dropdown:hover .dropdown-menu {
+        position: relative;
+        top: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.05);
+        border: none;
+        box-shadow: none;
+        padding-left: 15px;
+        margin-top: 10px;
+        display: block; /* Asegura visibilidad en móvil */
+    }
+
+    /* --- SECCIÓN OUR PROCESS --- */
+    .process-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    .process-main-title {
+        font-size: 3rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        width: 100%;
+    }
+
+    .step-item {
+        align-items: center;
+        text-align: center;
+    }
+
+    .step-content p {
+        max-width: 100%;
+    }
+
+    /* --- SECCIÓN READY TO TRANSFORM (CTA) --- */
+    .cta-integration {
+        padding: 40px 15px;
+    }
+
+    .cta-container {
+        padding: 30px 20px;
+        border-radius: 30px;
+    }
+
+    .cta-content .section-title {
+        font-size: 2.2rem; /* Tamaño más manejable en móvil */
+    }
+
+    .contact-card-white {
+        padding: 15px 20px;
+        width: 100%;
+    }
+
+    /* --- GRID DE SERVICIOS (OFFERS) --- */
+    .offers-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .whole-home { 
+        grid-row: auto; 
+        grid-column: auto; 
+    }
+}
+
+/* ================================================================
+   COMMERCIAL SERVICES GRID (WHAT WE OFFER)
+   ================================================================ */
+.comm-services-section {
+    background-color: var(--primary); 
+    padding: 80px 0;
+    border-radius: 50px; 
+    margin: 40px 20px;
+}
+
+.comm-main-title {
+    color: #fff;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.comm-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas exactas */
+    gap: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.comm-service-item {
+    position: relative;
+    height: 500px;
+    border-radius: 30px; 
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.comm-service-item:hover {
+    transform: translateY(-10px);
+}
+
+.comm-service-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comm-text-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+}
+
+.comm-text-layer h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* ================================================================
+   CTA & CONTACT CARDS (READY TO TRANSFORM)
+   ================================================================ */
+.cta-integration {
+    padding: 80px 20px;
+}
+
+.cta-container {
+    background: var(--primary);
+    border-radius: 40px;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cta-image {
+    width: 100%;
+    max-width: 850px;
+    margin-bottom: 40px;
+}
+
+.cta-image img {
+    width: 100%;
+    border-radius: 35px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.cta-content {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.cta-content .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.cta-content .section-description {
+    color: #fff;
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: 0 auto;
+    opacity: 0.95;
+}
+
+/* Contenedor de las tarjetas blancas */
+.cta-contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.contact-card-white {
+    background: #fff;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 300px;
+    flex: 1;
+    max-width: 380px;
+}
+
+.card-icon-box {
+    width: 55px;
+    height: 55px;
+    background: var(--primary);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.card-icon-box img {
+    width: 25px;
+    filter: brightness(0) invert(1);
+}
+
+.card-info h4 {
+    font-size: 1rem;
+    color: #000;
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+
+.card-info p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0;
+}
+
+/* ================================================================
+   AJUSTES RESPONSIVE ADICIONALES
+   ================================================================ */
+@media (max-width: 1024px) {
+    .comm-grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .comm-grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-content .section-title {
+        font-size: 2.5rem;
+    }
+
+    .cta-contact-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-card-white {
+        width: 100%;
+    }
+}
+
+/* ================================================================
+   INFINITE LUXURY - OFFERS SECTION
+   ================================================================ */
+.lux-offers-section {
+    padding: 100px 0;
+    background-color: #f9f9f9; /* Fondo claro para contrastar con las fotos */
+}
+
+.lux-main-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+.lux-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 tarjetas de lujo */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.lux-card {
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.lux-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.lux-image-box {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.lux-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.lux-card:hover .lux-image-box img {
+    transform: scale(1.1);
+}
+
+.lux-content {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.lux-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.lux-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Lista de características de lujo */
+.lux-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.lux-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.lux-list li::before {
+    content: "→"; /* Flecha elegante */
+    position: absolute;
+    left: 0;
+    color: var(--primary); /* Tu naranja corporativo */
+    font-weight: bold;
+}
+
+.lux-list li strong {
+    color: #000;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Botón interno de la tarjeta */
+.lux-btn {
+    display: inline-block;
+    margin-top: auto;
+    padding: 15px 30px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.lux-btn:hover {
+    background-color: var(--primary);
+}
+
+/* ================================================================
+   RESPONSIVE PARA LUXURY
+   ================================================================ */
+@media (max-width: 1024px) {
+    .lux-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .lux-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lux-main-title {
+        font-size: 2.5rem;
+    }
+
+    .lux-card {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}
