@@ -1,34 +1,21 @@
 <?php
 include_once 'header.php';
 
-// 1) Obtener la composición de los grupos (qué equipos van en cada grupo) desde groups.json
-$grupos_json = [];
-if (file_exists('groups.json')) {
-    $data = json_decode(file_get_contents('groups.json'), true);
-    foreach (($data['groups'] ?? []) as $g) {
-        $letra = $g['group'];
-        $equipos = [];
-        foreach ($g['matches'] as $m) {
-            $equipos[$m['home_team']] = true;
-            $equipos[$m['away_team']] = true;
-        }
-        $grupos_json[$letra] = array_keys($equipos);
-    }
-    ksort($grupos_json);
-}
-
-// 2) Traer las estadísticas (puntos, gol diferencia y goles a favor) desde la base de datos
-$query = "SELECT id_equipo, nombre, id_grupo, puntos_obtenidos, goles_dif,
+// Traemos los equipos con su grupo, bandera, puntos y goles a favor (calculados sobre partidos finalizados)
+$query = "SELECT id_equipo, nombre, bandera, id_grupo, puntos_obtenidos, goles_dif,
           COALESCE((SELECT SUM(goles_equipo1) FROM Partido WHERE id_equipo1 = id_equipo AND estado='Finalizado'), 0) +
           COALESCE((SELECT SUM(goles_equipo2) FROM Partido WHERE id_equipo2 = id_equipo AND estado='Finalizado'), 0) AS goles_favor
-          FROM Equipo";
-$stats_db = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+          FROM Equipo
+          ORDER BY id_grupo ASC, puntos_obtenidos DESC, goles_dif DESC, goles_favor DESC";
+$res = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
-// Indexamos por nombre (que es como vienen en groups.json: "Mexico", "Korea Republic", etc.)
-$stats_por_nombre = [];
-foreach ($stats_db as $r) {
-    $stats_por_nombre[$r['nombre']] = $r;
+// Agrupamos por letra de grupo (la info de qué equipo va en qué grupo viene de Equipo.id_grupo)
+$equipos_por_grupo = [];
+foreach ($res as $row) {
+    $g = $row['id_grupo'] ?? 'SIN GRUPO';
+    $equipos_por_grupo[$g][] = $row;
 }
+ksort($equipos_por_grupo);
 ?>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
@@ -41,38 +28,11 @@ foreach ($stats_db as $r) {
 
 <p style="color:#475569;">Los <strong>dos primeros equipos</strong> de cada grupo (resaltados en verde) clasifican a la <strong>Fase de Eliminación</strong>.</p>
 
-<?php if (empty($grupos_json)): ?>
-    <p class="error">No se encontró el archivo groups.json o está vacío.</p>
+<?php if (empty($equipos_por_grupo)): ?>
+    <p class="error">No hay equipos cargados en la base de datos.</p>
 <?php endif; ?>
 
-<?php foreach ($grupos_json as $letra => $nombres_equipos):
-    // Construir la lista de equipos del grupo combinando JSON + estadísticas
-    $equipos_grupo = [];
-    foreach ($nombres_equipos as $nombre) {
-        if (isset($stats_por_nombre[$nombre])) {
-            $equipos_grupo[] = $stats_por_nombre[$nombre];
-        } else {
-            // Si el equipo aún no está en la BD, lo mostramos con stats en cero
-            $equipos_grupo[] = [
-                'id_equipo'        => '-',
-                'nombre'           => $nombre,
-                'id_grupo'         => $letra,
-                'puntos_obtenidos' => 0,
-                'goles_dif'        => 0,
-                'goles_favor'      => 0,
-            ];
-        }
-    }
-
-    // Ordenar el grupo: puntos DESC, gol diferencia DESC, goles a favor DESC
-    usort($equipos_grupo, function($a, $b) {
-        if ($b['puntos_obtenidos'] != $a['puntos_obtenidos'])
-            return $b['puntos_obtenidos'] <=> $a['puntos_obtenidos'];
-        if ($b['goles_dif'] != $a['goles_dif'])
-            return $b['goles_dif'] <=> $a['goles_dif'];
-        return $b['goles_favor'] <=> $a['goles_favor'];
-    });
-?>
+<?php foreach ($equipos_por_grupo as $letra => $equipos): ?>
     <h3 style="margin-top: 30px; color: #1e3a8a; border-left: 5px solid #10b981; padding-left: 10px;">Grupo <?php echo htmlspecialchars($letra); ?></h3>
 
     <table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; text-align: left; margin-top: 8px;">
@@ -86,7 +46,11 @@ foreach ($stats_db as $r) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($equipos_grupo as $i => $row):
+            <?php if (count($equipos) == 0): ?>
+                <tr><td colspan="5" style="text-align: center; color: #64748b;">No hay equipos cargados en este grupo.</td></tr>
+            <?php endif; ?>
+
+            <?php foreach ($equipos as $i => $row):
                 $pos = $i + 1;
                 $clasifica = ($pos <= 2);
                 $row_bg = $clasifica ? '#dcfce7' : '#ffffff';
@@ -98,10 +62,11 @@ foreach ($stats_db as $r) {
                         <?php echo $pos; ?><?php echo $clasifica ? ' ✅' : ''; ?>
                     </td>
                     <td>
+                        <span style="font-size:20px; margin-right:8px; vertical-align:middle;">
+                            <?php echo $row['bandera'] ? $row['bandera'] : '🏳️'; ?>
+                        </span>
                         <strong><?php echo htmlspecialchars($row['nombre']); ?></strong>
-                        <?php if (!empty($row['id_equipo']) && $row['id_equipo'] !== '-'): ?>
-                            <span style="color:#64748b;">(<?php echo htmlspecialchars($row['id_equipo']); ?>)</span>
-                        <?php endif; ?>
+                        <span style="color:#64748b;">(<?php echo htmlspecialchars($row['id_equipo']); ?>)</span>
                     </td>
                     <td style="text-align: center;"><?php echo intval($row['goles_favor']); ?></td>
                     <td style="text-align: center; color: <?php echo $gd >= 0 ? '#16a34a' : '#dc2626'; ?>;">

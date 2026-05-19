@@ -13,38 +13,49 @@ if (!in_array($fase_activa, ['grupos', 'eliminacion'])) {
     $fase_activa = 'grupos';
 }
 
-// Aseguramos que exista la Fase de Grupos en el catálogo (necesaria para FK al insertar Partido)
+// Mapa "nombre del equipo" -> id_equipo (código FIFA) construido desde la tabla Equipo
+$equipos_map = [];
+try {
+    foreach ($db->query("SELECT id_equipo, nombre FROM Equipo") as $e) {
+        $equipos_map[$e['nombre']] = $e['id_equipo'];
+    }
+} catch (PDOException $e) { /* aún no se ha cargado la tabla Equipo */ }
+
+// Aseguramos que exista la Fase de Grupos en el catálogo (FK requerida para insertar Partido)
 try {
     $db->exec("INSERT INTO Fase (id_fase, nombre_fase, orden) VALUES ('F1', 'Fase de Grupos', 1) ON CONFLICT (id_fase) DO NOTHING");
-} catch (PDOException $e) { /* ignorar si la tabla aún no existe */ }
+} catch (PDOException $e) { /* ignorar */ }
 
-// Guardar Pronóstico
+// ===============================
+// Guardar Pronóstico (POST)
+// ===============================
 if (isset($_POST['guardar_pronostico'])) {
     $id_partido = intval($_POST['id_partido']);
     $g1 = intval($_POST['p_goles1']);
     $g2 = intval($_POST['p_goles2']);
     $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $home = $_POST['home_team'];
-    $away = $_POST['away_team'];
+    $hora  = $_POST['hora'];
+    $home  = $_POST['home_team'];
+    $away  = $_POST['away_team'];
     $grupo = $_POST['grupo'];
 
-    // Validar fecha y hora para evitar ingresos extemporáneos
     $match_time = strtotime($fecha . ' ' . $hora);
     if (time() >= $match_time) {
         echo "<p class='error'>Error: Este partido ya comenzó o finalizó. No puedes modificar esta quiniela.</p>";
     } else {
         try {
-            // Si el partido aún no existe en la BD, lo creamos a partir del JSON
+            // 1) Asegurar que el Partido exista en la BD (vinculado al equipo correspondiente)
             $chk = $db->prepare("SELECT id_partido FROM Partido WHERE id_partido = ?");
             $chk->execute([$id_partido]);
             if (!$chk->fetchColumn()) {
+                $id_eq1 = $equipos_map[$home] ?? $home;
+                $id_eq2 = $equipos_map[$away] ?? $away;
                 $insP = $db->prepare("INSERT INTO Partido (id_partido, fecha, hora, estado, id_fase, id_equipo1, id_equipo2, grupo_partido)
                                       VALUES (?, ?, ?, 'Pendiente', 'F1', ?, ?, ?)");
-                $insP->execute([$id_partido, $fecha, $hora, $home, $away, $grupo]);
+                $insP->execute([$id_partido, $fecha, $hora, $id_eq1, $id_eq2, $grupo]);
             }
 
-            // UPSERT manual del pronóstico
+            // 2) UPSERT manual del pronóstico en Quiniela
             $exist = $db->prepare("SELECT id_quiniela FROM Quiniela WHERE id_usuario = ? AND id_partido = ?");
             $exist->execute([$id_usuario, $id_partido]);
             $q_id = $exist->fetchColumn();
@@ -63,7 +74,7 @@ if (isset($_POST['guardar_pronostico'])) {
     }
 }
 
-// Pronósticos previos del usuario indexados por id_partido
+// Cargar pronósticos previos del usuario, indexados por id_partido
 $pronosticos = [];
 $stmtP = $db->prepare("SELECT id_partido, prediccion_goles1, prediccion_goles2, puntos_obtenidos FROM Quiniela WHERE id_usuario = ?");
 $stmtP->execute([$id_usuario]);
@@ -71,11 +82,11 @@ foreach ($stmtP->fetchAll(PDO::FETCH_ASSOC) as $r) {
     $pronosticos[$r['id_partido']] = $r;
 }
 
-// Cargar partidos de la fase de grupos desde groups.json
+// Estructura de grupos y partidos desde groups.json (define el orden A -> L y la lista de juegos)
 $grupos = [];
 if (file_exists('groups.json')) {
-    $groups_data = json_decode(file_get_contents('groups.json'), true);
-    $grupos = $groups_data['groups'] ?? [];
+    $data = json_decode(file_get_contents('groups.json'), true);
+    $grupos = $data['groups'] ?? [];
 }
 ?>
 
@@ -106,12 +117,12 @@ if (file_exists('groups.json')) {
         ?>
             <div style="background: <?php echo $is_expired ? '#f1f5f9' : '#ffffff'; ?>; padding: 20px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
                 <form method="POST" action="?fase=grupos" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
-                    <input type="hidden" name="id_partido"  value="<?php echo $mid; ?>">
-                    <input type="hidden" name="fecha"       value="<?php echo htmlspecialchars($m['date']); ?>">
-                    <input type="hidden" name="hora"        value="<?php echo htmlspecialchars($m['time']); ?>">
-                    <input type="hidden" name="home_team"   value="<?php echo htmlspecialchars($m['home_team']); ?>">
-                    <input type="hidden" name="away_team"   value="<?php echo htmlspecialchars($m['away_team']); ?>">
-                    <input type="hidden" name="grupo"       value="<?php echo htmlspecialchars($g['group']); ?>">
+                    <input type="hidden" name="id_partido" value="<?php echo $mid; ?>">
+                    <input type="hidden" name="fecha"      value="<?php echo htmlspecialchars($m['date']); ?>">
+                    <input type="hidden" name="hora"       value="<?php echo htmlspecialchars($m['time']); ?>">
+                    <input type="hidden" name="home_team"  value="<?php echo htmlspecialchars($m['home_team']); ?>">
+                    <input type="hidden" name="away_team"  value="<?php echo htmlspecialchars($m['away_team']); ?>">
+                    <input type="hidden" name="grupo"      value="<?php echo htmlspecialchars($g['group']); ?>">
 
                     <div>
                         <span style="display:block; font-size:12px; color:#64748b;">Grupo <?php echo htmlspecialchars($g['group']); ?> · <?php echo htmlspecialchars($m['stadium']); ?></span>

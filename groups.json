@@ -8,48 +8,48 @@
                     "match_id": "400021443",
                     "date": "2026-06-11",
                     "time": "15:00",
-                    "home_team": "Mexico",
-                    "away_team": "South Africa",
+                    "home_team": "México",
+                    "away_team": "Sudáfrica",
                     "stadium": "Estadio Ciudad de México (Mexico City)"
                 },
                 {
                     "match_id": "400021441",
                     "date": "2026-06-11",
                     "time": "22:00",
-                    "home_team": "Korea Republic",
-                    "away_team": "Czechia",
+                    "home_team": "Corea del Sur",
+                    "away_team": "Chequia",
                     "stadium": "Estadio Guadalajara"
                 },
                 {
                     "match_id": "400021440",
                     "date": "2026-06-18",
                     "time": "12:00",
-                    "home_team": "Czechia",
-                    "away_team": "South Africa",
+                    "home_team": "Chequia",
+                    "away_team": "Sudáfrica",
                     "stadium": "Atlanta Stadium"
                 },
                 {
                     "match_id": "400021442",
                     "date": "2026-06-18",
                     "time": "21:00",
-                    "home_team": "Mexico",
-                    "away_team": "Korea Republic",
+                    "home_team": "México",
+                    "away_team": "Corea del Sur",
                     "stadium": "Estadio Guadalajara"
                 },
                 {
                     "match_id": "400021444",
                     "date": "2026-06-24",
                     "time": "21:00",
-                    "home_team": "Czechia",
-                    "away_team": "Mexico",
+                    "home_team": "Chequia",
+                    "away_team": "México",
                     "stadium": "Estadio Ciudad de México (Mexico City)"
                 },
                 {
                     "match_id": "400021445",
                     "date": "2026-06-24",
                     "time": "21:00",
-                    "home_team": "South Africa",
-                    "away_team": "Korea Republic",
+                    "home_team": "Sudáfrica",
+                    "away_team": "Corea del Sur",
                     "stadium": "Estadio Monterrey"
                 }
             ]
@@ -61,48 +61,48 @@
                     "match_id": "400021449",
                     "date": "2026-06-12",
                     "time": "15:00",
-                    "home_team": "Canada",
-                    "away_team": "Bosnia and Herzegovina",
+                    "home_team": "Canadá",
+                    "away_team": "Bosnia y Herzegovina",
                     "stadium": "Toronto Stadium"
                 },
                 {
                     "match_id": "400021447",
                     "date": "2026-06-13",
                     "time": "15:00",
-                    "home_team": "Qatar",
-                    "away_team": "Switzerland",
+                    "home_team": "Catar",
+                    "away_team": "Suiza",
                     "stadium": "San Francisco Bay Area Stadium"
                 },
                 {
                     "match_id": "400021446",
                     "date": "2026-06-18",
                     "time": "15:00",
-                    "home_team": "Switzerland",
-                    "away_team": "Bosnia and Herzegovina",
+                    "home_team": "Suiza",
+                    "away_team": "Bosnia y Herzegovina",
                     "stadium": "Los Angeles Stadium"
                 },
                 {
                     "match_id": "400021450",
                     "date": "2026-06-18",
                     "time": "18:00",
-                    "home_team": "Canada",
-                    "away_team": "Qatar",
+                    "home_team": "Canadá",
+                    "away_team": "Catar",
                     "stadium": "BC Place Vancouver"
                 },
                 {
                     "match_id": "400021451",
                     "date": "2026-06-24",
                     "time": "15:00",
-                    "home_team": "Switzerland",
-                    "away_team": "Canada",
+                    "home_team": "Suiza",
+                    "away_team": "Canadá",
                     "stadium": "BC Place Vancouver"
                 },
                 {
                     "match_id": "400021448",
                     "date": "2026-06-24",
                     "time": "15:00",
-                    "home_team": "Bosnia and Herzegovina",
-                    "away_team": "Qatar",
+                    "home_team": "Bosnia y Herzegovina",
+                    "away_team": "Catar",
                     "stadium": "Seattle Stadium"
                 }
             ]
@@ -114,48 +114,48 @@
                     "match_id": "400021456",
                     "date": "2026-06-13",
                     "time": "18:00",
-                    "home_team": "Brazil",
-                    "away_team": "Morocco",
+                    "home_team": "Brasil",
+                    "away_team": "Marruecos",
                     "stadium": "New York New Jersey Stadium"
                 },
                 {
                     "match_id": "400021453",
                     "date": "2026-06-13",
                     "time": "21:00",
-                    "home_team": "Haiti",
-                    "away_team": "Scotland",
+                    "home_team": "Haití",
+                    "away_team": "Escocia",
                     "stadium": "Boston Stadium"
                 },
                 {
                     "match_id": "400021454",
                     "date": "2026-06-19",
                     "time": "18:00",
-                    "home_team": "Scotland",
-                    "away_team": "Morocco",
+                    "home_team": "Escocia",
+                    "away_team": "Marruecos",
                     "stadium": "Boston Stadium"
                 },
                 {
                     "match_id": "400021457",
                     "date": "2026-06-19",
                     "time": "21:00",
-                    "home_team": "Brazil",
-                    "away_team": "Haiti",
+                    "home_team": "Brasil",
+                    "away_team": "Haití",
                     "stadium": "Philadelphia Stadium"
                 },
                 {
                     "match_id": "400021455",
                     "date": "2026-06-24",
                     "time": "18:00",
-                    "home_team": "Brazil",
-                    "away_team": "Scotland",
+                    "home_team": "Brasil",
+                    "away_team": "Escocia",
                     "stadium": "Miami Stadium"
                 },
                 {
                     "match_id": "400021452",
                     "date": "2026-06-24",
                     "time": "18:00",
-                    "home_team": "Morocco",
-                    "away_team": "Haiti",
+                    "home_team": "Marruecos",
+                    "away_team": "Haití",
                     "stadium": "Atlanta Stadium"
                 }
             ]
@@ -167,7 +167,7 @@
                     "match_id": "400021458",
                     "date": "2026-06-12",
                     "time": "21:00",
-                    "home_team": "USA",
+                    "home_team": "Estados Unidos",
                     "away_team": "Paraguay",
                     "stadium": "Los Angeles Stadium"
                 },
@@ -176,14 +176,14 @@
                     "date": "2026-06-13",
                     "time": "00:00",
                     "home_team": "Australia",
-                    "away_team": "Türkiye",
+                    "away_team": "Turquía",
                     "stadium": "BC Place Vancouver"
                 },
                 {
                     "match_id": "400021462",
                     "date": "2026-06-19",
                     "time": "15:00",
-                    "home_team": "USA",
+                    "home_team": "Estados Unidos",
                     "away_team": "Australia",
                     "stadium": "Seattle Stadium"
                 },
@@ -191,7 +191,7 @@
                     "match_id": "400021460",
                     "date": "2026-06-19",
                     "time": "00:00",
-                    "home_team": "Türkiye",
+                    "home_team": "Turquía",
                     "away_team": "Paraguay",
                     "stadium": "San Francisco Bay Area Stadium"
                 },
@@ -199,8 +199,8 @@
                     "match_id": "400021459",
                     "date": "2026-06-25",
                     "time": "22:00",
-                    "home_team": "Türkiye",
-                    "away_team": "USA",
+                    "home_team": "Turquía",
+                    "away_team": "Estados Unidos",
                     "stadium": "Los Angeles Stadium"
                 },
                 {
@@ -220,15 +220,15 @@
                     "match_id": "400021464",
                     "date": "2026-06-14",
                     "time": "13:00",
-                    "home_team": "Germany",
-                    "away_team": "Curaçao",
+                    "home_team": "Alemania",
+                    "away_team": "Curazao",
                     "stadium": "Houston Stadium"
                 },
                 {
                     "match_id": "400021467",
                     "date": "2026-06-14",
                     "time": "19:00",
-                    "home_team": "Côte d'Ivoire",
+                    "home_team": "Costa de Marfil",
                     "away_team": "Ecuador",
                     "stadium": "Philadelphia Stadium"
                 },
@@ -236,8 +236,8 @@
                     "match_id": "400021469",
                     "date": "2026-06-20",
                     "time": "16:00",
-                    "home_team": "Germany",
-                    "away_team": "Côte d'Ivoire",
+                    "home_team": "Alemania",
+                    "away_team": "Costa de Marfil",
                     "stadium": "Toronto Stadium"
                 },
                 {
@@ -245,15 +245,15 @@
                     "date": "2026-06-20",
                     "time": "22:00",
                     "home_team": "Ecuador",
-                    "away_team": "Curaçao",
+                    "away_team": "Curazao",
                     "stadium": "Kansas City Stadium"
                 },
                 {
                     "match_id": "400021468",
                     "date": "2026-06-25",
                     "time": "16:00",
-                    "home_team": "Curaçao",
-                    "away_team": "Côte d'Ivoire",
+                    "home_team": "Curazao",
+                    "away_team": "Costa de Marfil",
                     "stadium": "Philadelphia Stadium"
                 },
                 {
@@ -261,7 +261,7 @@
                     "date": "2026-06-25",
                     "time": "16:00",
                     "home_team": "Ecuador",
-                    "away_team": "Germany",
+                    "away_team": "Alemania",
                     "stadium": "New York New Jersey Stadium"
                 }
             ]
@@ -273,48 +273,48 @@
                     "match_id": "400021470",
                     "date": "2026-06-14",
                     "time": "16:00",
-                    "home_team": "Netherlands",
-                    "away_team": "Japan",
+                    "home_team": "Países Bajos",
+                    "away_team": "Japón",
                     "stadium": "Dallas Stadium"
                 },
                 {
                     "match_id": "400021474",
                     "date": "2026-06-14",
                     "time": "22:00",
-                    "home_team": "Sweden",
-                    "away_team": "Tunisia",
+                    "home_team": "Suecia",
+                    "away_team": "Túnez",
                     "stadium": "Estadio Monterrey"
                 },
                 {
                     "match_id": "400021472",
                     "date": "2026-06-20",
                     "time": "13:00",
-                    "home_team": "Netherlands",
-                    "away_team": "Sweden",
+                    "home_team": "Países Bajos",
+                    "away_team": "Suecia",
                     "stadium": "Houston Stadium"
                 },
                 {
                     "match_id": "400021475",
                     "date": "2026-06-20",
                     "time": "00:00",
-                    "home_team": "Tunisia",
-                    "away_team": "Japan",
+                    "home_team": "Túnez",
+                    "away_team": "Japón",
                     "stadium": "Estadio Monterrey"
                 },
                 {
                     "match_id": "400021471",
                     "date": "2026-06-25",
                     "time": "19:00",
-                    "home_team": "Japan",
-                    "away_team": "Sweden",
+                    "home_team": "Japón",
+                    "away_team": "Suecia",
                     "stadium": "Dallas Stadium"
                 },
                 {
                     "match_id": "400021473",
                     "date": "2026-06-25",
                     "time": "19:00",
-                    "home_team": "Tunisia",
-                    "away_team": "Netherlands",
+                    "home_team": "Túnez",
+                    "away_team": "Países Bajos",
                     "stadium": "Kansas City Stadium"
                 }
             ]
@@ -326,48 +326,48 @@
                     "match_id": "400021478",
                     "date": "2026-06-15",
                     "time": "15:00",
-                    "home_team": "Belgium",
-                    "away_team": "Egypt",
+                    "home_team": "Bélgica",
+                    "away_team": "Egipto",
                     "stadium": "Seattle Stadium"
                 },
                 {
                     "match_id": "400021476",
                     "date": "2026-06-15",
                     "time": "21:00",
-                    "home_team": "IR Iran",
-                    "away_team": "New Zealand",
+                    "home_team": "Irán",
+                    "away_team": "Nueva Zelanda",
                     "stadium": "Los Angeles Stadium"
                 },
                 {
                     "match_id": "400021477",
                     "date": "2026-06-21",
                     "time": "15:00",
-                    "home_team": "Belgium",
-                    "away_team": "IR Iran",
+                    "home_team": "Bélgica",
+                    "away_team": "Irán",
                     "stadium": "Los Angeles Stadium"
                 },
                 {
                     "match_id": "400021480",
                     "date": "2026-06-21",
                     "time": "21:00",
-                    "home_team": "New Zealand",
-                    "away_team": "Egypt",
+                    "home_team": "Nueva Zelanda",
+                    "away_team": "Egipto",
                     "stadium": "BC Place Vancouver"
                 },
                 {
                     "match_id": "400021479",
                     "date": "2026-06-26",
                     "time": "23:00",
-                    "home_team": "Egypt",
-                    "away_team": "IR Iran",
+                    "home_team": "Egipto",
+                    "away_team": "Irán",
                     "stadium": "Seattle Stadium"
                 },
                 {
                     "match_id": "400021481",
                     "date": "2026-06-26",
                     "time": "23:00",
-                    "home_team": "New Zealand",
-                    "away_team": "Belgium",
+                    "home_team": "Nueva Zelanda",
+                    "away_team": "Bélgica",
                     "stadium": "BC Place Vancouver"
                 }
             ]
@@ -379,7 +379,7 @@
                     "match_id": "400021482",
                     "date": "2026-06-15",
                     "time": "12:00",
-                    "home_team": "Spain",
+                    "home_team": "España",
                     "away_team": "Cabo Verde",
                     "stadium": "Atlanta Stadium"
                 },
@@ -387,7 +387,7 @@
                     "match_id": "400021486",
                     "date": "2026-06-15",
                     "time": "15:00",
-                    "home_team": "Saudi Arabia",
+                    "home_team": "Arabia Saudita",
                     "away_team": "Uruguay",
                     "stadium": "Miami Stadium"
                 },
@@ -395,8 +395,8 @@
                     "match_id": "400021483",
                     "date": "2026-06-21",
                     "time": "12:00",
-                    "home_team": "Spain",
-                    "away_team": "Saudi Arabia",
+                    "home_team": "España",
+                    "away_team": "Arabia Saudita",
                     "stadium": "Atlanta Stadium"
                 },
                 {
@@ -412,7 +412,7 @@
                     "date": "2026-06-26",
                     "time": "20:00",
                     "home_team": "Cabo Verde",
-                    "away_team": "Saudi Arabia",
+                    "away_team": "Arabia Saudita",
                     "stadium": "Houston Stadium"
                 },
                 {
@@ -420,7 +420,7 @@
                     "date": "2026-06-26",
                     "time": "20:00",
                     "home_team": "Uruguay",
-                    "away_team": "Spain",
+                    "away_team": "España",
                     "stadium": "Estadio Guadalajara"
                 }
             ]
@@ -432,7 +432,7 @@
                     "match_id": "400021490",
                     "date": "2026-06-16",
                     "time": "15:00",
-                    "home_team": "France",
+                    "home_team": "Francia",
                     "away_team": "Senegal",
                     "stadium": "New York New Jersey Stadium"
                 },
@@ -440,23 +440,23 @@
                     "match_id": "400021488",
                     "date": "2026-06-16",
                     "time": "18:00",
-                    "home_team": "Iraq",
-                    "away_team": "Norway",
+                    "home_team": "Irak",
+                    "away_team": "Noruega",
                     "stadium": "Boston Stadium"
                 },
                 {
                     "match_id": "400021492",
                     "date": "2026-06-22",
                     "time": "17:00",
-                    "home_team": "France",
-                    "away_team": "Iraq",
+                    "home_team": "Francia",
+                    "away_team": "Irak",
                     "stadium": "Philadelphia Stadium"
                 },
                 {
                     "match_id": "400021491",
                     "date": "2026-06-22",
                     "time": "20:00",
-                    "home_team": "Norway",
+                    "home_team": "Noruega",
                     "away_team": "Senegal",
                     "stadium": "New York New Jersey Stadium"
                 },
@@ -464,8 +464,8 @@
                     "match_id": "400021489",
                     "date": "2026-06-26",
                     "time": "15:00",
-                    "home_team": "Norway",
-                    "away_team": "France",
+                    "home_team": "Noruega",
+                    "away_team": "Francia",
                     "stadium": "Boston Stadium"
                 },
                 {
@@ -473,7 +473,7 @@
                     "date": "2026-06-26",
                     "time": "15:00",
                     "home_team": "Senegal",
-                    "away_team": "Iraq",
+                    "away_team": "Irak",
                     "stadium": "Toronto Stadium"
                 }
             ]
@@ -486,7 +486,7 @@
                     "date": "2026-06-16",
                     "time": "21:00",
                     "home_team": "Argentina",
-                    "away_team": "Algeria",
+                    "away_team": "Argelia",
                     "stadium": "Kansas City Stadium"
                 },
                 {
@@ -494,7 +494,7 @@
                     "date": "2026-06-16",
                     "time": "00:00",
                     "home_team": "Austria",
-                    "away_team": "Jordan",
+                    "away_team": "Jordania",
                     "stadium": "San Francisco Bay Area Stadium"
                 },
                 {
@@ -509,15 +509,15 @@
                     "match_id": "400021499",
                     "date": "2026-06-22",
                     "time": "23:00",
-                    "home_team": "Jordan",
-                    "away_team": "Algeria",
+                    "home_team": "Jordania",
+                    "away_team": "Argelia",
                     "stadium": "San Francisco Bay Area Stadium"
                 },
                 {
                     "match_id": "400021497",
                     "date": "2026-06-27",
                     "time": "22:00",
-                    "home_team": "Algeria",
+                    "home_team": "Argelia",
                     "away_team": "Austria",
                     "stadium": "Kansas City Stadium"
                 },
@@ -525,7 +525,7 @@
                     "match_id": "400021495",
                     "date": "2026-06-27",
                     "time": "22:00",
-                    "home_team": "Jordan",
+                    "home_team": "Jordania",
                     "away_team": "Argentina",
                     "stadium": "Dallas Stadium"
                 }
@@ -546,7 +546,7 @@
                     "match_id": "400021504",
                     "date": "2026-06-17",
                     "time": "22:00",
-                    "home_team": "Uzbekistan",
+                    "home_team": "Uzbekistán",
                     "away_team": "Colombia",
                     "stadium": "Mexico City Stadium"
                 },
@@ -555,7 +555,7 @@
                     "date": "2026-06-23",
                     "time": "13:00",
                     "home_team": "Portugal",
-                    "away_team": "Uzbekistan",
+                    "away_team": "Uzbekistán",
                     "stadium": "Houston Stadium"
                 },
                 {
@@ -579,7 +579,7 @@
                     "date": "2026-06-27",
                     "time": "19:30",
                     "home_team": "Congo DR",
-                    "away_team": "Uzbekistan",
+                    "away_team": "Uzbekistán",
                     "stadium": "Atlanta Stadium"
                 }
             ]
@@ -591,8 +591,8 @@
                     "match_id": "400021507",
                     "date": "2026-06-17",
                     "time": "16:00",
-                    "home_team": "England",
-                    "away_team": "Croatia",
+                    "home_team": "Inglaterra",
+                    "away_team": "Croacia",
                     "stadium": "Dallas Stadium"
                 },
                 {
@@ -600,14 +600,14 @@
                     "date": "2026-06-17",
                     "time": "19:00",
                     "home_team": "Ghana",
-                    "away_team": "Panama",
+                    "away_team": "Panamá",
                     "stadium": "Toronto Stadium"
                 },
                 {
                     "match_id": "400021506",
                     "date": "2026-06-23",
                     "time": "16:00",
-                    "home_team": "England",
+                    "home_team": "Inglaterra",
                     "away_team": "Ghana",
                     "stadium": "Boston Stadium"
                 },
@@ -615,23 +615,23 @@
                     "match_id": "400021511",
                     "date": "2026-06-23",
                     "time": "19:00",
-                    "home_team": "Panama",
-                    "away_team": "Croatia",
+                    "home_team": "Panamá",
+                    "away_team": "Croacia",
                     "stadium": "Toronto Stadium"
                 },
                 {
                     "match_id": "400021508",
                     "date": "2026-06-27",
                     "time": "17:00",
-                    "home_team": "Panama",
-                    "away_team": "England",
+                    "home_team": "Panamá",
+                    "away_team": "Inglaterra",
                     "stadium": "New York New Jersey Stadium"
                 },
                 {
                     "match_id": "400021509",
                     "date": "2026-06-27",
                     "time": "17:00",
-                    "home_team": "Croatia",
+                    "home_team": "Croacia",
                     "away_team": "Ghana",
                     "stadium": "Philadelphia Stadium"
                 }
